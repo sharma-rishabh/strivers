@@ -1,7 +1,11 @@
 const noPadding = () => "";
+const decrementingPaddingGenerator = (level, _, columns) =>
+  " ".repeat(columns - level);
+
 const maxWidthGenerator = (_, __, columns) => columns;
-const levelWidthGenerator = (level, _, __) => level;
+const levelWidthGenerator = (level) => level;
 const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
+const triangleWidthGenerator = (level) => 2 * level - 1;
 
 const solidRowGenerator = (width) => "*".repeat(width);
 
@@ -40,4 +44,6 @@ module.exports = {
   repeatedNumberedRowGenerator,
   decrementingWidthGenerator,
   noPadding,
+  triangleWidthGenerator,
+  decrementingPaddingGenerator,
 };
