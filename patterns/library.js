@@ -10,6 +10,8 @@ const numberedRowGenerator = (width) => {
     .join("");
 };
 
+const repeatedNumberedRowGenerator = (width) => (width + "").repeat(width);
+
 const patternGenerator = (rows, columns, widthGenerator, rowGenerator) => {
   return new Array(rows)
     .fill(0)
@@ -26,4 +28,5 @@ module.exports = {
   levelWidthGenerator,
   solidRowGenerator,
   numberedRowGenerator,
+  repeatedNumberedRowGenerator,
 };
