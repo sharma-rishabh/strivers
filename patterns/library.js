@@ -1,3 +1,4 @@
+const noPadding = () => "";
 const maxWidthGenerator = (_, __, columns) => columns;
 const levelWidthGenerator = (level, _, __) => level;
 const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
@@ -13,12 +14,19 @@ const numberedRowGenerator = (width) => {
 
 const repeatedNumberedRowGenerator = (width) => (width + "").repeat(width);
 
-const patternGenerator = (rows, columns, widthGenerator, rowGenerator) => {
+const patternGenerator = (
+  rows,
+  columns,
+  paddingGenerator,
+  widthGenerator,
+  rowGenerator
+) => {
   return new Array(rows)
     .fill(0)
     .map((_, level) => {
+      const padding = paddingGenerator(level + 1, rows, columns);
       const width = widthGenerator(level + 1, rows, columns);
-      return rowGenerator(width);
+      return padding + rowGenerator(width);
     })
     .join("\n");
 };
@@ -31,4 +39,5 @@ module.exports = {
   numberedRowGenerator,
   repeatedNumberedRowGenerator,
   decrementingWidthGenerator,
+  noPadding,
 };
