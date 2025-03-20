@@ -15,6 +15,13 @@ const diamondWidthGenerator = (level, height) => {
     ? triangleWidthGenerator(level)
     : invertedTriangleWidthGenerator(level, height, height);
 };
+
+const arrowWidthGenerator = (level, height) => {
+  const halfwayPoint = Math.ceil(height / 2);
+  return level <= halfwayPoint
+    ? levelWidthGenerator(level)
+    : decrementingWidthGenerator(level, height, height);
+};
 const maxWidthGenerator = (_, __, columns) => columns;
 const levelWidthGenerator = (level) => level;
 const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
@@ -65,4 +72,5 @@ module.exports = {
   incrementingPaddingGenerator,
   diamondWidthGenerator,
   diamondPaddingGenerator,
+  arrowWidthGenerator,
 };
