@@ -1,5 +1,6 @@
 const maxWidthGenerator = (_, __, columns) => columns;
 const levelWidthGenerator = (level, _, __) => level;
+const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
 
 const solidRowGenerator = (width) => "*".repeat(width);
 
@@ -29,4 +30,5 @@ module.exports = {
   solidRowGenerator,
   numberedRowGenerator,
   repeatedNumberedRowGenerator,
+  decrementingWidthGenerator,
 };
