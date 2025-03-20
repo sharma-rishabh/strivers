@@ -2,12 +2,25 @@ const noPadding = () => "";
 const decrementingPaddingGenerator = (level, _, columns) =>
   " ".repeat(columns - level);
 const incrementingPaddingGenerator = (level) => " ".repeat(level - 1);
+const diamondPaddingGenerator = (level, height) => {
+  const halfwayPoint = Math.ceil(height / 2);
+  return level <= halfwayPoint
+    ? decrementingPaddingGenerator(level, halfwayPoint, halfwayPoint)
+    : incrementingPaddingGenerator(level - halfwayPoint);
+};
 
+const diamondWidthGenerator = (level, height) => {
+  const halfwayPoint = Math.ceil(height / 2);
+  return level <= halfwayPoint
+    ? triangleWidthGenerator(level)
+    : invertedTriangleWidthGenerator(level, height, height);
+};
 const maxWidthGenerator = (_, __, columns) => columns;
 const levelWidthGenerator = (level) => level;
 const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
 const triangleWidthGenerator = (level) => 2 * level - 1;
-const invertedTriangleWidthGenerator = (level, rows) => 2 * (rows - level) + 1;
+const invertedTriangleWidthGenerator = (level, _, columns) =>
+  2 * (columns - level) + 1;
 
 const solidRowGenerator = (width) => "*".repeat(width);
 
@@ -50,4 +63,6 @@ module.exports = {
   decrementingPaddingGenerator,
   invertedTriangleWidthGenerator,
   incrementingPaddingGenerator,
+  diamondWidthGenerator,
+  diamondPaddingGenerator,
 };
