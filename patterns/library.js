@@ -3,6 +3,13 @@ const levelWidthGenerator = (level, _, __) => level;
 
 const solidRowGenerator = (width) => "*".repeat(width);
 
+const numberedRowGenerator = (width) => {
+  return new Array(width)
+    .fill(0)
+    .map((_, index) => index + 1)
+    .join("");
+};
+
 const patternGenerator = (rows, columns, widthGenerator, rowGenerator) => {
   return new Array(rows)
     .fill(0)
@@ -18,4 +25,5 @@ module.exports = {
   maxWidthGenerator,
   levelWidthGenerator,
   solidRowGenerator,
+  numberedRowGenerator,
 };
