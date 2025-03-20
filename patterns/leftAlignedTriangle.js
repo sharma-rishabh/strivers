@@ -1,8 +1,16 @@
+const {
+  patternGenerator,
+  levelWidthGenerator,
+  solidRowGenerator,
+} = require("./library");
+
 const leftAlignedTriangle = (height) => {
-  return new Array(height)
-    .fill(0)
-    .map((_, i) => "*".repeat(i + 1))
-    .join("\n");
+  return patternGenerator(
+    height,
+    height,
+    levelWidthGenerator,
+    solidRowGenerator
+  );
 };
 
-console.log(leftAlignedTriangle(5))
+console.log(leftAlignedTriangle(5));
