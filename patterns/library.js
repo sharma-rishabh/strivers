@@ -76,6 +76,17 @@ const alphabeticalRowGenerator = (width) => {
     .join("");
 };
 
+const mirroredAlphabeticalRowGenerator = (width) => {
+  const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+  const cycler = getCycler(0, alphabets);
+  const alphabetCount = Math.ceil(width / 2);
+  const rowFirstHalf = new Array(alphabetCount)
+    .fill(0)
+    .map(() => cycler())
+    .join("");
+  return rowFirstHalf + mirrorText(rowFirstHalf.slice(0, -1));
+};
+
 const repeatedAlphabeticalRowGenerator = (width) => {
   const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
   return alphabets[width - 1].repeat(width);
@@ -134,4 +145,5 @@ module.exports = {
   continuousNumberedRowGenerator,
   alphabeticalRowGenerator,
   repeatedAlphabeticalRowGenerator,
+  mirroredAlphabeticalRowGenerator
 };
