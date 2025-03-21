@@ -32,15 +32,15 @@ const invertedTriangleWidthGenerator = (level, _, columns) =>
 
 const solidRowGenerator = (width) => "*".repeat(width);
 
-const binaryRowGenerator = (width) => {
-  const getCycler = (starting, fillers) => {
-    let nextIndex = starting;
-    return () => {
-      const currentFillerIndex = nextIndex;
-      nextIndex = (currentFillerIndex + 1) % fillers.length;
-      return fillers[currentFillerIndex];
-    };
+const getCycler = (starting, fillers) => {
+  let nextIndex = starting;
+  return () => {
+    const currentFillerIndex = nextIndex;
+    nextIndex = (currentFillerIndex + 1) % fillers.length;
+    return fillers[currentFillerIndex];
   };
+};
+const binaryRowGenerator = (width) => {
   const starting = isEven(width) ? 0 : 1;
   const cycler = getCycler(starting, [0, 1]);
   return new Array(width)
@@ -64,7 +64,16 @@ const continuousNumberedRowGenerator = (width) => {
   const prevEnding = new Array(width - 1).fill(0).reduce((acc, _, i) => {
     return acc + width - (i + 1);
   }, 0);
-  return numberedStringGenerator(width, prevEnding)
+  return numberedStringGenerator(width, prevEnding);
+};
+
+const alphabeticalRowGenerator = (width) => {
+  const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+  const cycler = getCycler(0, alphabets);
+  return new Array(width)
+    .fill(0)
+    .map(() => cycler())
+    .join("");
 };
 
 const addRightPadding = (string, totalWidth) => {
@@ -119,4 +128,5 @@ module.exports = {
   binaryRowGenerator,
   mirroredNumberedRowGenerator,
   continuousNumberedRowGenerator,
+  alphabeticalRowGenerator
 };
