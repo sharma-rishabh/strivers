@@ -49,11 +49,22 @@ const binaryRowGenerator = (width) => {
     .join("");
 };
 
-const numberedRowGenerator = (width) => {
+const numberedStringGenerator = (width, starting) => {
   return new Array(width)
     .fill(0)
-    .map((_, index) => index + 1)
+    .map((_, index) => starting + index + 1)
     .join("");
+};
+
+const numberedRowGenerator = (width) => {
+  return numberedStringGenerator(width, 0);
+};
+
+const continuousNumberedRowGenerator = (width) => {
+  const prevEnding = new Array(width - 1).fill(0).reduce((acc, _, i) => {
+    return acc + width - (i + 1);
+  }, 0);
+  return numberedStringGenerator(width, prevEnding)
 };
 
 const addRightPadding = (string, totalWidth) => {
@@ -84,7 +95,7 @@ const patternGenerator = (
     .map((_, level) => {
       const padding = paddingGenerator(level + 1, rows, columns);
       const width = widthGenerator(level + 1, rows, columns);
-      return padding + rowGenerator(width, level+1);
+      return padding + rowGenerator(width, level + 1);
     })
     .join("\n");
 };
@@ -107,4 +118,5 @@ module.exports = {
   arrowWidthGenerator,
   binaryRowGenerator,
   mirroredNumberedRowGenerator,
+  continuousNumberedRowGenerator,
 };
