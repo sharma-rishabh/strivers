@@ -76,6 +76,10 @@ const alphabeticalRowGenerator = (width) => {
     .join("");
 };
 
+const repeatedAlphabeticalRowGenerator = (width) => {
+  const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
+  return alphabets[width - 1].repeat(width);
+};
 const addRightPadding = (string, totalWidth) => {
   return string + " ".repeat(totalWidth - string.length);
 };
@@ -128,5 +132,6 @@ module.exports = {
   binaryRowGenerator,
   mirroredNumberedRowGenerator,
   continuousNumberedRowGenerator,
-  alphabeticalRowGenerator
+  alphabeticalRowGenerator,
+  repeatedAlphabeticalRowGenerator,
 };
