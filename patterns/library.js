@@ -1,3 +1,4 @@
+const isEven = (number) => number % 2 === 0;
 const noPadding = () => "";
 const decrementingPaddingGenerator = (level, _, columns) =>
   " ".repeat(columns - level);
@@ -30,6 +31,23 @@ const invertedTriangleWidthGenerator = (level, _, columns) =>
   2 * (columns - level) + 1;
 
 const solidRowGenerator = (width) => "*".repeat(width);
+
+const binaryRowGenerator = (width) => {
+  const getCycler = (starting, fillers) => {
+    let nextIndex = starting;
+    return () => {
+      const currentFillerIndex = nextIndex;
+      nextIndex = (currentFillerIndex + 1) % fillers.length;
+      return fillers[currentFillerIndex];
+    };
+  };
+  const starting = isEven(width) ? 0 : 1;
+  const cycler = getCycler(starting, [0, 1]);
+  return new Array(width)
+    .fill(0)
+    .map(() => cycler() + "")
+    .join("");
+};
 
 const numberedRowGenerator = (width) => {
   return new Array(width)
@@ -73,4 +91,5 @@ module.exports = {
   diamondWidthGenerator,
   diamondPaddingGenerator,
   arrowWidthGenerator,
+  binaryRowGenerator,
 };
