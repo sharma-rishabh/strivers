@@ -33,6 +33,10 @@ const invertedTriangleWidthGenerator = (level, _, columns) =>
   2 * (columns - level) + 1;
 
 const solidRowGenerator = (width) => "*".repeat(width);
+const hollowRowGenerator = (width, level) => {
+  const isBoundingRow = level === 1 || level === width;
+  return !isBoundingRow ? "*" + " ".repeat(width - 2) + "*" : "*".repeat(width);
+};
 
 const getCycler = (starting, fillers) => {
   let nextIndex = starting;
@@ -182,4 +186,5 @@ module.exports = {
   diamondImprintRowGenerator,
   blackWidowRowGenerator,
   extraWidthGenerator,
+  hollowRowGenerator,
 };
