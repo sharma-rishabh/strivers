@@ -25,6 +25,7 @@ const arrowWidthGenerator = (level, height) => {
     : decrementingWidthGenerator(level, height, height);
 };
 const maxWidthGenerator = (_, __, columns) => columns;
+const extraWidthGenerator = (_, __, columns) => columns + 1;
 const levelWidthGenerator = (level) => level;
 const decrementingWidthGenerator = (level, _, columns) => columns - level + 1;
 const triangleWidthGenerator = (level) => 2 * level - 1;
@@ -117,13 +118,24 @@ const mirroredNumberedRowGenerator = (width, level) => {
 
 const diamondImprintRowGenerator = (width, level, height) => {
   const halfwayPoint = height / 2;
-  const isPreHalfwayPoint = level <= halfwayPoint;
-  const imprintLength = isPreHalfwayPoint
+  const isTillHalfwayPoint = level <= halfwayPoint;
+  const imprintLength = isTillHalfwayPoint
     ? (level - 1) * 2
     : (height - level) * 2;
   const paddingLength = (width - imprintLength) / 2;
   const row = "*".repeat(paddingLength) + " ".repeat(imprintLength);
   return row + "*".repeat(height - row.length);
+};
+
+const blackWidowRowGenerator = (width, level) => {
+  const halfwayPoint = Math.ceil(width / 2);
+  const isTillHalfwayPoint = level <= halfwayPoint;
+  const imprintLength = isTillHalfwayPoint
+    ? width - level * 2
+    : (level - halfwayPoint) * 2;
+  const paddingLength = (width - imprintLength) / 2;
+  const row = "*".repeat(paddingLength) + " ".repeat(imprintLength);
+  return row + "*".repeat(width - row.length);
 };
 const repeatedNumberedRowGenerator = (width) => (width + "").repeat(width);
 
@@ -168,4 +180,6 @@ module.exports = {
   mirroredAlphabeticalRowGenerator,
   backwardsAlphabeticalRowGenerator,
   diamondImprintRowGenerator,
+  blackWidowRowGenerator,
+  extraWidthGenerator,
 };
