@@ -38,6 +38,19 @@ const hollowRowGenerator = (width, level) => {
   return !isBoundingRow ? "*" + " ".repeat(width - 2) + "*" : "*".repeat(width);
 };
 
+const numberedSquareRowGenerator = (width, level) => {
+  const halfwayPoint = Math.ceil(width / 2);
+  const isTillHalfwayPoint = level <= halfwayPoint;
+  const centerDigit =
+    (isTillHalfwayPoint ? halfwayPoint - level : level - halfwayPoint) + 1;
+
+  const center = (centerDigit + "").repeat(centerDigit * 2 - 1);
+  return new Array(halfwayPoint - centerDigit).fill(0).reduce((acc, _, i) => {
+    const padding = centerDigit + i + 1 + "";
+    return padding + acc + padding;
+  }, center);
+};
+
 const getCycler = (starting, fillers) => {
   let nextIndex = starting;
   return () => {
@@ -187,4 +200,5 @@ module.exports = {
   blackWidowRowGenerator,
   extraWidthGenerator,
   hollowRowGenerator,
+  numberedSquareRowGenerator,
 };
