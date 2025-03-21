@@ -75,7 +75,16 @@ const alphabeticalRowGenerator = (width) => {
     .map(() => cycler())
     .join("");
 };
-
+const backwardsAlphabeticalRowGenerator = (width, level, height) => {
+  const alphabets = "abcdefghijklmnopqrstuvwxyz"
+    .split("")
+    .slice(height - level, height);
+  const cycler = getCycler(0, alphabets);
+  return new Array(width)
+    .fill(0)
+    .map(() => cycler())
+    .join("");
+};
 const mirroredAlphabeticalRowGenerator = (width) => {
   const alphabets = "abcdefghijklmnopqrstuvwxyz".split("");
   const cycler = getCycler(0, alphabets);
@@ -119,7 +128,7 @@ const patternGenerator = (
     .map((_, level) => {
       const padding = paddingGenerator(level + 1, rows, columns);
       const width = widthGenerator(level + 1, rows, columns);
-      return padding + rowGenerator(width, level + 1);
+      return padding + rowGenerator(width, level + 1, rows, columns);
     })
     .join("\n");
 };
@@ -145,5 +154,6 @@ module.exports = {
   continuousNumberedRowGenerator,
   alphabeticalRowGenerator,
   repeatedAlphabeticalRowGenerator,
-  mirroredAlphabeticalRowGenerator
+  mirroredAlphabeticalRowGenerator,
+  backwardsAlphabeticalRowGenerator,
 };
