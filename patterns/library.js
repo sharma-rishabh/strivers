@@ -56,6 +56,20 @@ const numberedRowGenerator = (width) => {
     .join("");
 };
 
+const addRightPadding = (string, totalWidth) => {
+  return string + " ".repeat(totalWidth - string.length);
+};
+
+const mirrorText = (text) => {
+  return text.split("").reverse().join("");
+};
+
+const mirroredNumberedRowGenerator = (width, level) => {
+  const numbers = numberedRowGenerator(level);
+  const numbersWithRightPadding = addRightPadding(numbers, width);
+  return numbersWithRightPadding + mirrorText(numbersWithRightPadding);
+};
+
 const repeatedNumberedRowGenerator = (width) => (width + "").repeat(width);
 
 const patternGenerator = (
@@ -70,7 +84,7 @@ const patternGenerator = (
     .map((_, level) => {
       const padding = paddingGenerator(level + 1, rows, columns);
       const width = widthGenerator(level + 1, rows, columns);
-      return padding + rowGenerator(width);
+      return padding + rowGenerator(width, level+1);
     })
     .join("\n");
 };
@@ -92,4 +106,5 @@ module.exports = {
   diamondPaddingGenerator,
   arrowWidthGenerator,
   binaryRowGenerator,
+  mirroredNumberedRowGenerator,
 };
