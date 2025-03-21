@@ -1,8 +1,9 @@
 const isEven = (number) => number % 2 === 0;
 const noPadding = () => "";
-const decrementingPaddingGenerator = (level, _, columns) =>
-  " ".repeat(columns - level);
-const incrementingPaddingGenerator = (level) => " ".repeat(level - 1);
+const decrementingPaddingGenerator = (level, _, columns, style = " ") =>
+  style.repeat(columns - level);
+const incrementingPaddingGenerator = (level, _, __, style = " ") =>
+  style.repeat(level - 1);
 const diamondPaddingGenerator = (level, height) => {
   const halfwayPoint = Math.ceil(height / 2);
   return level <= halfwayPoint
@@ -114,6 +115,16 @@ const mirroredNumberedRowGenerator = (width, level) => {
   return numbersWithRightPadding + mirrorText(numbersWithRightPadding);
 };
 
+const diamondImprintRowGenerator = (width, level, height) => {
+  const halfwayPoint = height / 2;
+  const isPreHalfwayPoint = level <= halfwayPoint;
+  const imprintLength = isPreHalfwayPoint
+    ? (level - 1) * 2
+    : (height - level) * 2;
+  const paddingLength = (width - imprintLength) / 2;
+  const row = "*".repeat(paddingLength) + " ".repeat(imprintLength);
+  return row + "*".repeat(height - row.length);
+};
 const repeatedNumberedRowGenerator = (width) => (width + "").repeat(width);
 
 const patternGenerator = (
@@ -156,4 +167,5 @@ module.exports = {
   repeatedAlphabeticalRowGenerator,
   mirroredAlphabeticalRowGenerator,
   backwardsAlphabeticalRowGenerator,
+  diamondImprintRowGenerator,
 };
