@@ -35,10 +35,26 @@ const armstrongNumber = (number) => {
     }, 0)
   );
 };
+
+const divisors = (number) => {
+  const root = Math.floor(Math.sqrt(number));
+  return new Array(root).fill(0).reduce((acc, _, index) => {
+    const divisor = index + 1;
+    if (number % divisor === 0) {
+      const quotient = number / divisor;
+      const newDivisors =
+      quotient === divisor ? [quotient] : [quotient, divisor];
+      return acc.concat(newDivisors);
+    }
+    return acc;
+  }, []);
+};
+
 module.exports = {
   countDigits,
   reverseNumber,
   pallindrome,
   gcd,
   armstrongNumber,
+  divisors,
 };
