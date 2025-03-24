@@ -21,9 +21,24 @@ const gcd = (number1, number2) => {
     ? gcd(number1 - number2, number2)
     : gcd(number2 - number1, number1);
 };
+
+const splitDigits = (number) => {
+  return (number + "").split("").map((digit) => +digit);
+};
+
+const armstrongNumber = (number) => {
+  const digits = splitDigits(number);
+  return (
+    number ===
+    digits.reduce((acc, digit) => {
+      return acc + Math.pow(digit, digits.length);
+    }, 0)
+  );
+};
 module.exports = {
   countDigits,
   reverseNumber,
   pallindrome,
   gcd,
+  armstrongNumber,
 };
