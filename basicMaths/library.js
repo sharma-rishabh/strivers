@@ -9,7 +9,12 @@ const reverseNumber = (number) => {
   return (number % 10) * Math.pow(10, numOfDigits - 1) + reversed;
 };
 
+const pallindrome = (number) => {
+  return reverseNumber(number) === number;
+};
+
 module.exports = {
   countDigits,
   reverseNumber,
+  pallindrome
 };
