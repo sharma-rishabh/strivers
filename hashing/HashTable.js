@@ -17,7 +17,7 @@ const isPrime = (number) => {
 };
 
 const getNearestPrime = (number) => {
-  const currentContender = number + 1;
+  let currentContender = number + 1;
   while (!isPrime(currentContender)) {
     currentContender++;
   }
@@ -38,7 +38,7 @@ class HashTable {
   graveyard = "";
   constructor(totalKeys) {
     this.hasher = getHasher(totalKeys);
-    this.table = new Array(totalKeys).fill([]);
+    this.table = new Array(totalKeys).fill(0).map(() => []);
   }
 
   _entry(index, key) {
@@ -48,7 +48,7 @@ class HashTable {
   search(key) {
     const index = this.hasher(key);
     const entry = this._entry(index, key);
-    if (entry.length === 0 || entry[1] === this.graveyard) {
+    if (!entry || entry[1] === this.graveyard) {
       return;
     }
     return entry[1];
@@ -69,4 +69,17 @@ class HashTable {
     const entry = this._entry(index, key);
     entry[1] = this.graveyard;
   }
+
+  toArray() {
+    return this.table.reduce((acc, items) => {
+      if (items.length !== 0) {
+        return acc.concat(items);
+      }
+      return acc;
+    }, []);
+  }
 }
+
+module.exports = {
+  HashTable,
+};
