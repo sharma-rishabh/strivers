@@ -13,8 +13,17 @@ const pallindrome = (number) => {
   return reverseNumber(number) === number;
 };
 
+const gcd = (number1, number2) => {
+  if (number1 === 0 || number2 === 0) {
+    return number1 || number2;
+  }
+  return number1 >= number2
+    ? gcd(number1 - number2, number2)
+    : gcd(number2 - number1, number1);
+};
 module.exports = {
   countDigits,
   reverseNumber,
-  pallindrome
+  pallindrome,
+  gcd,
 };
