@@ -43,13 +43,16 @@ const divisors = (number) => {
     if (number % divisor === 0) {
       const quotient = number / divisor;
       const newDivisors =
-      quotient === divisor ? [quotient] : [quotient, divisor];
+        quotient === divisor ? [quotient] : [quotient, divisor];
       return acc.concat(newDivisors);
     }
     return acc;
   }, []);
 };
 
+const isPrime = (number) => {
+  return divisors(number).length === 2;
+};
 module.exports = {
   countDigits,
   reverseNumber,
@@ -57,4 +60,5 @@ module.exports = {
   gcd,
   armstrongNumber,
   divisors,
+  isPrime,
 };
