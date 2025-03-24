@@ -1,5 +1,2 @@
-const countDigits = (number) => {
-  return ("" + number).length;
-};
-
+const { countDigits } = require("./library.js");
 console.log(countDigits(1234512345));
