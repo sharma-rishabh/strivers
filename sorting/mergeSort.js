@@ -7,8 +7,8 @@ const merge = (arr1, arr2) => {
   let arr2Index = 0;
   while (mergedArray.length < arr1.length + arr2.length) {
     if (
-      arr1Index < arr1.length &&
-      (arr1[arr1Index] <= arr2[arr2Index] || arr2Index === arr2.length)
+      arr2Index === arr2.length ||
+      (arr1[arr1Index] <= arr2[arr2Index] && arr1Index < arr1.length)
     ) {
       mergedArray.push(arr1[arr1Index]);
       arr1Index++;
@@ -30,4 +30,4 @@ const mergeSort = (arr) => {
   return mergedArray;
 };
 
-console.log(mergeSort([6,6,6,6,5,1,23]));
+console.log(mergeSort([6, 6, 6, 6, 5, 1, 23]));
