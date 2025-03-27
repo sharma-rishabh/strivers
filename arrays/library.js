@@ -9,7 +9,15 @@ const smallestInArray = (arr) => {
   }, Infinity);
 };
 
+const leftShiftFirstNElements = (arr, n) => {
+  for (let i = 0; i < n; i++) {
+    arr.push(arr.shift());
+  }
+  return arr;
+};
+
 module.exports = {
   biggestInArray,
   smallestInArray,
+  leftShiftFirstNElements,
 };
