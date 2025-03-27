@@ -1,15 +1,13 @@
+const { biggestInArray } = require("./library");
 const secondLargest = (arr) => {
+  const largest = biggestInArray(arr)
+  let secondLargest = -Infinity
   for (element of arr) {
-    let largerThanElement = 0;
-    for (ele of arr) {
-      if (ele > element) {
-        largerThanElement++;
-      }
-    }
-    if (largerThanElement === 1) {
-      return element
+    if (element < largest && element > secondLargest) {
+      secondLargest = element
     }
   }
+  return secondLargest
 };
 
 console.log(secondLargest([-1, -2, -3, -4, -5]));
