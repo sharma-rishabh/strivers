@@ -4,7 +4,6 @@ const twoSum = (arr, sum) => {
   let rightIndex = arr.length - 1;
   while (leftIndex < arr.length || rightIndex > 0) {
     const currSum = arr[leftIndex] + arr[rightIndex];
-    console.log(arr[leftIndex], arr[rightIndex]);
     if (currSum === sum) return [arr[leftIndex], arr[rightIndex]];
     if (currSum < sum) {
       leftIndex++;
