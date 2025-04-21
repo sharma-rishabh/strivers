@@ -1,22 +1,19 @@
 const threeSum = (arr) => {
   arr.sort((a, b) => a - b);
   const sums = [];
-  let leftIndex = 0;
-  let rightIndex = arr.length - 1;
-  let middleIndex = 1;
-  while (leftIndex < rightIndex && middleIndex < rightIndex) {
-    if (arr[leftIndex] + arr[middleIndex] + arr[rightIndex] < 0) {
-      middleIndex++;
-    }
-    if (arr[leftIndex] + arr[middleIndex] + arr[rightIndex] < 0) {
-      leftIndex++;
-    }
-    if (arr[leftIndex] + arr[middleIndex] + arr[rightIndex] > 0) {
-      rightIndex--;
-    }
-    if (arr[leftIndex] + arr[middleIndex] + arr[rightIndex] === 0) {
-      sums.push([arr[leftIndex], arr[middleIndex], arr[rightIndex]]);
-      middleIndex++;
+  for (let i = 0; i < arr.length; i++) {
+    let j = i + 1;
+    let k = arr.length - 1;
+    while (j < k) {
+      if (arr[i] + arr[j] + arr[k] === 0) {
+        sums.push([arr[i], arr[j], arr[k]]);
+        j++;
+        k--;
+      } else if (arr[i] + arr[j] + arr[k] < 0) {
+        j++;
+      } else {
+        k--;
+      }
     }
   }
   return sums;
