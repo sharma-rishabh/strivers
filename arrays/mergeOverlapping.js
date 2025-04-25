@@ -1,23 +1,16 @@
 const mergeOverlapping = (arr) => {
-  const merged = [];
-  let i = 0;
-  while (i < arr.length) {
-    const currMerge = arr[i];
-    let j = i;
-    while (
-      arr[j + 1] !== undefined &&
-      j < arr.length &&
-      (arr[j + 1][0] <= currMerge[0] || arr[j + 1][0] <= currMerge[1])
-    ) {
-      const start = Math.min(arr[j +1][0], currMerge[0]);
-      const end = Math.max(arr[j + 1][1], currMerge[1]);
-      currMerge[0] = start;
-      currMerge[1] = end;
-      j++;
+  const merged = [arr[0]];
+  arr.sort((a,b) => a[0] - b[0])
+  for (let i = 1; i < arr.length; i++) {
+    const last = merged[merged.length - 1];
+    const curr = arr[i];
+    if (curr[0] <= last[1]) {
+      last[1] = Math.max(curr[1], last[1]);
+    } else {
+      merged.push(curr);
     }
-    merged.push(currMerge)
-    i = j + 1;
   }
+
   return merged;
 };
 
